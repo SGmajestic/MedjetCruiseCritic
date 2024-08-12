@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Image Display</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="imageFrame"></iframe>
+    <script>
+        function updateIframe() {
+            var iframe = document.getElementById('imageFrame');
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+            var src = '';
+
+            // Define the URLs
+            var urls = {
+                '300X250': 'https://sgmajestic.github.io/Medjet300X250/',
+                '300X600': 'https://sgmajestic.github.io/Medjet300X600/',
+                '728X90': 'https://sgmajestic.github.io/Medjet728X90/',
+                '970X90': 'https://sgmajestic.github.io/Medjet970X90/',
+                '320X50': 'https://sgmajestic.github.io/Medjet320X50/'
+            };
+
+            // Select the image URL based on exact width and height
+            if (width === 300 && height === 250) {
+                src = urls['300X250'];
+            } else if (width === 300 && height === 600) {
+                src = urls['300X600'];
+            } else if (width === 728 && height === 90) {
+                src = urls['728X90'];
+            } else if (width === 970 && height === 90) {
+                src = urls['970X90'];
+            } else if (width === 320 && height === 50) {
+                src = urls['320X50'];
+            } else {
+                // Default to one of the images if none match
+                src = urls['320X50'];
+            }
+
+            iframe.src = src;
+        }
+
+        window.addEventListener('resize', updateIframe);
+        window.addEventListener('load', updateIframe);
+    </script>
+</body>
+</html>
