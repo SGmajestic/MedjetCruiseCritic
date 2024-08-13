@@ -16,6 +16,16 @@
             border: none;
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9Z3VQJC0F"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // Configuration for Google Analytics
+        gtag('config', 'G-L9Z3VQJC0F');
+    </script>
 </head>
 <body>
     <iframe id="imageFrame"></iframe>
@@ -52,10 +62,27 @@
             }
 
             iframe.src = src;
+
+            // Track an impression when the iframe src is updated
+            gtag('event', 'impression', {
+                'event_category': 'Dynamic Image Display',
+                'event_label': src,
+                'value': 1
+            });
         }
 
         window.addEventListener('resize', updateIframe);
         window.addEventListener('load', updateIframe);
+
+        // Track clicks on the iframe
+        document.getElementById('imageFrame').addEventListener('click', function() {
+            gtag('event', 'click', {
+                'event_category': 'Dynamic Image Clicks',
+                'event_label': 'Image Clicked',
+                'value': 1
+            });
+        });
     </script>
 </body>
 </html>
+
