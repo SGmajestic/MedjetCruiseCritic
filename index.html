@@ -29,7 +29,10 @@
         // Track impressions and clicks from iframe
         window.addEventListener('message', function(event) {
             console.log('Received message:', event.data); // Debugging
-            if (event.origin !== 'https://sgmajestic.github.io') return; // Ensure the message is from the correct origin
+            if (event.origin !== 'https://sgmajestic.github.io') {
+                console.error('Unexpected origin:', event.origin);
+                return; // Ensure the message is from the correct origin
+            }
 
             if (event.data.type === 'iframe-impression') {
                 gtag('event', 'impression', {
@@ -45,6 +48,8 @@
                     'value': 1
                 });
                 console.log('Click event sent:', event.data.src); // Debugging
+            } else {
+                console.warn('Unhandled message type:', event.data.type); // Debugging
             }
         });
     </script>
@@ -84,6 +89,7 @@
             }
 
             iframe.src = src;
+            console.log('Iframe src updated to:', src); // Debugging
         }
 
         window.addEventListener('resize', updateIframe);
@@ -91,4 +97,3 @@
     </script>
 </body>
 </html>
-
