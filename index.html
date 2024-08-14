@@ -28,6 +28,7 @@
 
         // Track impressions and clicks from iframe
         window.addEventListener('message', function(event) {
+            console.log('Received message:', event.data); // Debugging
             if (event.origin !== 'https://sgmajestic.github.io') return; // Ensure the message is from the correct origin
 
             if (event.data.type === 'iframe-impression') {
@@ -36,18 +37,20 @@
                     'event_label': event.data.src,
                     'value': 1
                 });
+                console.log('Impression event sent:', event.data.src); // Debugging
             } else if (event.data.type === 'iframe-click') {
                 gtag('event', 'click', {
                     'event_category': 'Dynamic Image Clicks',
                     'event_label': event.data.src,
                     'value': 1
                 });
+                console.log('Click event sent:', event.data.src); // Debugging
             }
         });
     </script>
 </head>
 <body>
-    <iframe id="imageFrame" src="https://sgmajestic.github.io/Medjet300X250/"></iframe>
+    <iframe id="imageFrame" src="https://sgmajestic.github.io/MedjetCruiseCritic/"></iframe>
     <script>
         function updateIframe() {
             var iframe = document.getElementById('imageFrame');
