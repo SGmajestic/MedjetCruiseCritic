@@ -25,10 +25,29 @@
 
         // Configuration for Google Analytics
         gtag('config', 'G-L9Z3VQJC0F');
+
+        // Track impressions and clicks from iframe
+        window.addEventListener('message', function(event) {
+            if (event.origin !== 'https://sgmajestic.github.io') return; // Ensure the message is from the correct origin
+
+            if (event.data.type === 'iframe-impression') {
+                gtag('event', 'impression', {
+                    'event_category': 'Dynamic Image Display',
+                    'event_label': event.data.src,
+                    'value': 1
+                });
+            } else if (event.data.type === 'iframe-click') {
+                gtag('event', 'click', {
+                    'event_category': 'Dynamic Image Clicks',
+                    'event_label': event.data.src,
+                    'value': 1
+                });
+            }
+        });
     </script>
 </head>
 <body>
-    <iframe id="imageFrame"></iframe>
+    <iframe id="imageFrame" src="https://sgmajestic.github.io/Medjet300X250/"></iframe>
     <script>
         function updateIframe() {
             var iframe = document.getElementById('imageFrame');
@@ -62,27 +81,10 @@
             }
 
             iframe.src = src;
-
-            // Track an impression when the iframe src is updated
-            gtag('event', 'impression', {
-                'event_category': 'Dynamic Image Display',
-                'event_label': src,
-                'value': 1
-            });
         }
 
         window.addEventListener('resize', updateIframe);
         window.addEventListener('load', updateIframe);
-
-        // Track clicks on the iframe
-        document.getElementById('imageFrame').addEventListener('click', function() {
-            gtag('event', 'click', {
-                'event_category': 'Dynamic Image Clicks',
-                'event_label': 'Image Clicked',
-                'value': 1
-            });
-        });
     </script>
 </body>
 </html>
-
