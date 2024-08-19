@@ -15,6 +15,13 @@
             height: 100%;
             border: none;
         }
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9Z3VQJC0F"></script>
@@ -55,7 +62,10 @@
     </script>
 </head>
 <body>
-    <iframe id="imageFrame" src="https://sgmajestic.github.io/MedjetCruiseCritic/"></iframe>
+    <!-- Wrap the iframe with an anchor tag for the clicktag -->
+    <a href="https://www.cruisecritic.com/infotorial/2024/medjet-sept-2024-us/" target="_blank">
+        <iframe id="imageFrame" src="https://sgmajestic.github.io/MedjetCruiseCritic/"></iframe>
+    </a>
     <script>
         function updateIframe() {
             var iframe = document.getElementById('imageFrame');
